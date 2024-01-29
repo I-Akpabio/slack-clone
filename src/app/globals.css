@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: "Lato", sans-serif;
+}
+
+p {
+  font-size: 1rem;
+}
+
+nav {
+  background-color: #3f0f3f;
+}
+
+nav input {
+  border-radius: 0.3125rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 400px;
+  background: #3e2142;
+  color: white;
+  font-size: 0.8125rem;
+}
+
+.side-menu {
+  background-color: #3f0f3f;
+  color: white;
+  height: 100vh;
+  padding: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.side-menu p,
+.side-menu span {
+  opacity: 0.7;
+}
+
+.side-menu hr {
+  width: 114%;
+  margin-left: -2rem;
+}
+
+.main-user {
+  opacity: 1;
+  font-weight: 600;
+}
+
+.profile-card {
+  width: 32px;
+  height: 32px;
+  border-radius: 5px;
+  background-color: #616061;
+  text-align: center;
+  margin-bottom: 1rem;
+  padding-top: 5px;
+}
+
+.center-container {
+  border-right: 1px solid #e1e1e1;
+}
+
+.main-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  height: 86%;
+}
+.time-container {
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+.time-text {
+  border-radius: 4.4375rem;
+  border: 1px solid #dfdfdf;
+  background: #fff;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.05);
+  padding: 0.4375rem 0.75rem 0.4375rem 1.0625rem;
+  color: #1d1c1d;
+
+  font-family: Lato;
+  font-size: 0.8125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.ReactCollapse--collapse {
+  transition: height 300ms;
+}
+
+/* font */
+.light-1 {
+  color: #6f6f6f;
+
+  font-family: Lato;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.light-2 {
+  color: #616061;
+
+  font-family: Lato;
+  font-size: 0.8125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 142%;
+}
