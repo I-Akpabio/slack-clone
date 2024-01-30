@@ -4,12 +4,15 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { Collapse } from "react-collapse";
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import {
   BottomArrow,
   CloseIcon,
   EditIcon,
   HashIcon,
   InfoIcon,
+  NewUser,
   PhoneIcon,
   StarIcon,
   TimeIcon,
@@ -25,9 +28,9 @@ const Time = () => (
   </div>
 );
 
-const ChatMessage = ({ name, message }: { name?: any, message?:any }) => (
+const ChatMessage = ({ name, message, image }: { name?: any; message?: any, image?: any }) => (
   <div className="flex mt-3">
-    <img className="self-baseline mr-2" src="profile.png" alt="" />
+    <img className="self-baseline mr-2" src={image || 'profile.png'} alt="" />
     <div className="grow">
       <div className="flex items-center">
         <h5 className="font-bold">{name || "Joe Addams"}</h5>
@@ -35,8 +38,8 @@ const ChatMessage = ({ name, message }: { name?: any, message?:any }) => (
       </div>
 
       <p>
-        {message ||"   Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consectetur odit incidunt nihil quo, quidem obcaecati porro voluptatem tenetur praesentium sit!"}
-     
+        {message ||
+          "   Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consectetur odit incidunt nihil quo, quidem obcaecati porro voluptatem tenetur praesentium sit!"}
       </p>
     </div>
   </div>
@@ -88,8 +91,11 @@ export default function Home() {
             </div> */}
 
             <div className="grow pl-4">
-              <div className="flex items-center justify-between pl-3 pr-6">
-                <p style={{opacity: 1}} className="main-user">Desiginer KRS </p>
+              <div className="flex items-center justify-between pr-4">
+                <button style={{ opacity: 1 }} className="">
+                  <span style={{ opacity: 1 }} className="mr-3 main-user">DesiginerKRS</span>
+                   <FontAwesomeIcon icon={faAngleDown} />{" "}
+                </button>
 
                 <button onClick={() => setThread(thread ? "" : "esgfsdg")}>
                   <EditIcon />
@@ -143,34 +149,18 @@ export default function Home() {
                 <div className="flex items-center mb-1">
                   <BottomArrow />
 
-                  <span className="ml-4">Channels</span>
+                  <span className="ml-3">Channels</span>
                 </div>
 
                 <Collapse isOpened={openDirect}>
-                  <div className="flex items-center ml-4 mt-2">
-                    <HashIcon />
-                    <span className="ml-3 opacity-70">clubhouse</span>
-                  </div>
-                  <div className="flex items-center ml-4 mt-1">
-                    {" "}
-                    <HashIcon />
-                    <span className="ml-3 opacity-70">webinar</span>
-                  </div>
-                  <div className="flex items-center ml-4 mt-1">
-                    {" "}
-                    <HashIcon />
-                    <span className="ml-3 opacity-70">webinar</span>
-                  </div>
-                  <div className="flex items-center ml-4 mt-1">
-                    {" "}
-                    <HashIcon />
-                    <span className="ml-3 opacity-70">webinar</span>
-                  </div>
-                  <div className="flex items-center ml-4 mt-1">
-                    {" "}
-                    <HashIcon />
-                    <span className="ml-3 opacity-70">webinar</span>
-                  </div>
+                {["clubhouse", "english", "job_posting", "talks", "uiux_design"].map((i) => (
+                     <div className="flex items-center  mt-2">
+                     <HashIcon />
+                     <span className="ml-3 opacity-70">{i}</span>
+                   </div>
+                  ))}
+                 
+                
                 </Collapse>
 
                 <button
@@ -186,7 +176,7 @@ export default function Home() {
 
                 <Collapse isOpened={openDirect}>
                   {["Juwon", "Alley", "Kalii", "Cameron"].map((i) => (
-                    <div className="flex items-center ml-4 mt-2">
+                    <div className="flex items-center  mt-2">
                       <img
                         height={18}
                         width={18}
@@ -241,16 +231,20 @@ export default function Home() {
               style={{ borderBottom: "1px solid rgba(0,0,0,0.3)" }}
             >
               <div className="flex items-center">
-                <span className="mx-3 font-bold">#uiux_design</span>
+                <span className="mx-3 font-bold"># uiux_design</span>
                 <StarIcon />
               </div>
 
-              <div className="flex">
-                <span className="mr-4">
-                  <PhoneIcon />
-                </span>
+              <div className="flex items-center">
+                <div className="flex mr-2">
+                  <img width={24} height={24} src="profile.png" alt="" />
+                  <img width={24} height={24} src="profile2.png" alt="" />
+                  <img width={24} height={24} src="profile4.png" alt="" />
+                </div>
 
-                <InfoIcon />
+                <span className="mr-3">23</span>
+
+                <NewUser />
               </div>
             </div>
           )}
@@ -306,10 +300,11 @@ export default function Home() {
                 <CloseIcon />
               </button>
             </div>
+            <hr className="mt-3" style={{marginLeft: '-13px'}}/>
 
-            <ChatMessage name={"John Addams"} />
-            <ChatMessage />
-            <ChatMessage name={"John Addams"} />
+            <ChatMessage image={"profile4.png"} name={"John Addams"} />
+            <ChatMessage image={"profile2.png"} />
+            <ChatMessage name={"John Addams"} image={"profile4.png"} message={"We are the world"} />
           </div>
         )}
       </div>
