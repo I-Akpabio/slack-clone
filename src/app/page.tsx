@@ -107,7 +107,7 @@ export default function Home() {
               <div>
                 <div className="flex items-center mb-1">
                   <svg
-                    width="14"
+                    width="10"
                     height="14"
                     viewBox="0 0 14 14"
                     fill="none"
