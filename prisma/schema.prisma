@@ -58,6 +58,16 @@ model Conversation {
 
   userIds String[] @db.ObjectId
   users User[] @relation(fields: [userIds], references: [id])
+
+  channel Channel?
+}
+
+model Channel {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String?
+
+  conversation Conversation @relation(fields: [conversationId], references: [id])
+  conversationId String @db.ObjectId @unique
 }
 
 model Message {
