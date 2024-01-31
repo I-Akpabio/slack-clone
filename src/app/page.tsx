@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import Image from "next/image";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -86,8 +86,7 @@ export default function Home() {
       </nav>
       <div className="grid grid-cols-10">
         <div className="col-span-2 side-menu">
-        // @ts-expect-error Server Component
-          <Sidebar>
+    
             <div className="flex mt-1">
               {/* <div
                 style={{
@@ -208,7 +207,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </Sidebar>
+          
         </div>
 
         <div

@@ -1,4 +1,3 @@
-"use server"
 import prisma from "@/app/libs/prismadb";
 
 const getUsers = async () => {
