@@ -7,10 +7,15 @@ import getUsers from "@/app/actions/getUsers";
 async function Sidebar({ children }: { children?: React.ReactNode }) {
   const users = await getUsers();
 
-  
   // const currentUser = await getCurrentUser();
 
-  return <>{users.map((user)=> <>{user.name}</>)}</>;
+  return (
+    <>
+      {users.map((user) => (
+        <>{user.name}</>
+      ))}
+    </>
+  );
 }
 
 export default Sidebar;
