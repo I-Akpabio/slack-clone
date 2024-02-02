@@ -1,4 +1,5 @@
 import Image from "next/image";
+import AuthForm from "./components/AuthForm";
 
 const Auth = () => {
   return (
@@ -29,12 +30,7 @@ const Auth = () => {
             Sign in to your account
         </h2>
       </div>
-      <form action="">
-        <label htmlFor="">Email</label>
-        <input type="text" name="" id="" />
-        
-        <button type="submit">Login</button>
-        </form>     
+     <AuthForm />
   </div>
   )
 }

@@ -17,7 +17,7 @@ const ChatMessage = ({
 
       <p style={{fontSize:'15px'}}>
         {message ||
-          "   Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consectetur odit incidunt nihil quo, quidem obcaecati porro voluptatem tenetur praesentium sit!"}
+          " Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consectetur odit incidunt nihil quo, quidem obcaecati porro voluptatem tenetur praesentium sit!"}
       </p>
     </div>
   </div>

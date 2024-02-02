@@ -17,12 +17,29 @@ import ChatMessage from "../ChatMessage";
 import Time from "../Time";
 
 import MyModal from "../Modal";
+import axios from "axios";
 
 const AppRoot = ({ users, channels }: { users: any; channels: any }) => {
-  const [thread, setThread] = useState("hello");
+  const [thread, setThread] = useState("");
   const [openChannels, setOpenChannels] = useState(true);
   const [openDirect, setOpenDirect] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [user, setUser] = useState({});
+
+  const startConversation = (user: any) => {
+    axios
+      .post("/api/conversations", {
+        userId: user.id,
+        isDirect: true,
+        members: [],
+      })
+      .then((res: any) => {
+        console.log(res);
+        if (res.status == 200) {
+          setUser(res)
+        }
+      });
+  };
 
   return (
     <div className="grid grid-cols-10">
@@ -115,7 +132,7 @@ const AppRoot = ({ users, channels }: { users: any; channels: any }) => {
 
               <Collapse isOpened={openChannels}>
                 {channels.map((channel: any) => (
-                  <button className="flex items-center  mt-2">
+                  <button className="flex items-center ml-1  mt-2">
                     <HashIcon />
                     <span className="ml-3 opacity-70">{channel.name}</span>
                   </button>
@@ -145,8 +162,11 @@ const AppRoot = ({ users, channels }: { users: any; channels: any }) => {
 
               <Collapse isOpened={openDirect}>
                 {users.map((user: { name: string }) => (
-                  <button className="w-full">
-                    <div className="flex items-center mt-2">
+                  <button
+                    className="w-full"
+                    onClick={() => startConversation(user)}
+                  >
+                    <div className="flex items-center ml-1 mt-2">
                       <img
                         height={18}
                         width={18}
@@ -158,7 +178,7 @@ const AppRoot = ({ users, channels }: { users: any; channels: any }) => {
                     </div>
                   </button>
                 ))}
-                 <button className=" mt-2" onClick={() => setShowModal(true)}>
+                <button className=" mt-2" onClick={() => setShowModal(true)}>
                   <div className="flex items-center">
                     <span>
                       <FontAwesomeIcon icon={faPlus} />

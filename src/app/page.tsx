@@ -6,7 +6,8 @@ import getChannels from "./actions/getChanels";
 
 export default async function Home() {
   const users = await getUsers();
-  const channels = await getChannels()
+  const channels = await getChannels();
+
   return (
     <main className="">
       <nav>
