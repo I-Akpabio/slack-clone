@@ -10,9 +10,8 @@ import {
 } from "../Icon";
 import ChatMessage from "../ChatMessage";
 import Time from "../Time";
-
 import axios from "axios";
-
+import Sidebar from "@/app/[conversationId]/components/Sidebar";
 import { User, Channel } from "@prisma/client";
 
 const AppRoot = ({
@@ -24,19 +23,16 @@ const AppRoot = ({
 }) => {
 
 
-
   return (
     <div className="grid grid-cols-10">
       <div className="col-span-2 side-menu">
-      
+      <Sidebar users={users} channels={channels} />
       </div>
 
       <div
-        className={`${
-          thread ? "col-span-5 " : "col-span-8 "
-        } p-5 p-5 center-container`}
+        className={`col-span-5 col-span-8 p-5 center-container`}
       >
-        {thread ? (
+        {true ? (
           <div
             className="flex justify-between w-100 pb-4"
             style={{ borderBottom: "1px solid rgba(0,0,0,0.3)" }}

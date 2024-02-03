@@ -1,10 +1,8 @@
-
 import AppWithThread from "@/app/components/AppRoot/AppWithThread";
-export default async function Home() {
- 
 
-    return (
-     <AppWithThread  users={[]} channels={[]} />
-    );
-  }
-  
+import getUsers from "@/app/actions/getUsers";
+
+export default async function Home() {
+  const users = await getUsers()
+  return <AppWithThread users={users} channels={[]} />;
+}

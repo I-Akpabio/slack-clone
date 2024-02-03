@@ -7,8 +7,13 @@ import Link from "next/link";
 import React from "react";
 import { Collapse } from "react-collapse";
 import { useState } from "react";
+import axios from "axios";
+import { User,Channel } from "@prisma/client";
 
-export default function Sidebar() {
+export default function Sidebar({channels, users}:{
+  users: User[];
+  channels: Channel[];
+}) {
   const [thread, setThread] = useState("");
   const [openChannels, setOpenChannels] = useState(true);
   const [openDirect, setOpenDirect] = useState(true);
