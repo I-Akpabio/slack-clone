@@ -8,9 +8,12 @@ import React from "react";
 import { Collapse } from "react-collapse";
 import { useState } from "react";
 import axios from "axios";
-import { User,Channel } from "@prisma/client";
+import { User, Channel } from "@prisma/client";
 
-export default function Sidebar({channels, users}:{
+export default function Sidebar({
+  channels,
+  users,
+}: {
   users: User[];
   channels: Channel[];
 }) {
@@ -123,11 +126,14 @@ export default function Sidebar({channels, users}:{
           </button>
 
           <Collapse isOpened={openChannels}>
-            {channels.map((channel: any) => (
-              <button className="flex items-center ml-1  mt-2">
+            {channels.map((channel: Channel) => (
+              <Link
+                className="flex items-center ml-1 mt-2"
+                href={"/" + channel.conversationId}
+              >
                 <HashIcon />
                 <span className="ml-3 opacity-70">{channel.name}</span>
-              </button>
+              </Link>
             ))}
 
             <button className=" mt-2" onClick={() => setShowModal(true)}>
@@ -173,7 +179,7 @@ export default function Sidebar({channels, users}:{
                   <FontAwesomeIcon icon={faPlus} />
                 </span>
 
-                <span className="ml-3 opacity-70">Add Coworkers</span>
+                <span className="ml-3 opacity-70">Add Co-workers</span>
               </div>
             </button>
           </Collapse>

@@ -4,6 +4,6 @@ export default async function Home() {
  
 
   return (
-   <AppRoot users={[]} channels={[]} />
+   <></>
   );
 }

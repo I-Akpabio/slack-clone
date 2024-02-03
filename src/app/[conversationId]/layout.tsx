@@ -3,60 +3,39 @@ import {
   NewUser,
   PhoneIcon,
   StarIcon,
-  TimeIcon,
 } from "../components/Icon";
 import Sidebar from "./components/Sidebar";
-import AppRoot from "../components/AppRoot/AppRoot";
 import getUsers from "@/app/actions/getUsers";
 import getChannels from "../actions/getChannels";
-import getConversationById from "../actions/getConversationById";
 import ChatMessage from "../components/ChatMessage";
 import Time from "../components/Time";
+import Nav from "./components/Nav";
+import getConversationById from "../actions/getConversationById";
 
 export default async function ConversationsLayout({
+  params,
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode,
+  params: any
 }) {
   const users = await getUsers();
   const channels = await getChannels();
+  const conversation = await getConversationById(params.conversationId)
+
 
   return (
     <>
       {" "}
       <main className="">
-        <nav>
-          <div className="grid grid-cols-10 py-2">
-            <div className="col-span-2">
-              <div className="flex justify-end pr-5 pt-2">
-                <TimeIcon />
-              </div>
-            </div>
-            <div className="col-span-8">
-              <div className="flex justify-between pr-4">
-                <div className="search-container">
-                  <input
-                    type="text"
-                    name=""
-                    id=""
-                    className="p-1"
-                    placeholder="Search Company"
-                  />
-                </div>
-
-                <img src="/profile3.png" />
-              </div>
-            </div>
-          </div>
-        </nav>
-
+        <Nav />
         <div className="grid grid-cols-10">
           <div className="col-span-2 side-menu">
             <Sidebar users={users} channels={channels} />
           </div>
 
           <div className={`col-span-5 col-span-8 p-5 center-container`}>
-            {true ? (
+            {conversation.isGroup ? (
               <div
                 className="flex justify-between w-100 pb-4"
                 style={{ borderBottom: "1px solid rgba(0,0,0,0.3)" }}
@@ -71,7 +50,7 @@ export default async function ConversationsLayout({
                   >
                     <circle cx="4" cy="4" r="4" fill="#34785C" />
                   </svg>
-                  <span className="mx-3 font-bold">Jane</span>
+                  <span className="mx-3 font-bold">Jane </span>
                   <StarIcon />
                 </div>
 
@@ -87,7 +66,7 @@ export default async function ConversationsLayout({
               <>
                 <div className="flex justify-between w-100 pb-4">
                   <div className="flex items-center">
-                    <span className="mx-3 font-bold"># uiux_design</span>
+                    <span className="mx-3 font-bold"># {conversation.name}</span>
                     <StarIcon />
                   </div>
 
