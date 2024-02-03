@@ -2,12 +2,14 @@ import { TimeIcon } from "./components/Icon";
 import Sidebar from "./components/SideBar/SideBar";
 import AppRoot from "./components/AppRoot/AppRoot";
 import getUsers from "@/app/actions/getUsers";
-import getChannels from "./actions/getChanels";
+import getChannels from "./actions/getChannels";
+import getConversationById from "./actions/getConversationById";
 
 export default async function Home() {
   const users = await getUsers();
   const channels = await getChannels();
 
+  console.log(channels)
   return (
     <main className="">
       <nav>
