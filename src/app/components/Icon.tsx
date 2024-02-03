@@ -109,87 +109,142 @@ export const BottomArrow: FC = () => (
   </svg>
 );
 
-export const EditIcon : FC = () => (
+export const EditIcon: FC = () => (
   <svg
-  width="36"
-  height="36"
-  viewBox="0 0 36 36"
-  fill="none"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <circle cx="18" cy="18" r="18" fill="white" />
-  <rect
-    x="11.5"
-    y="11.5"
-    width="13"
+    width="36"
+    height="36"
+    viewBox="0 0 36 36"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle cx="18" cy="18" r="18" fill="white" />
+    <rect x="11.5" y="11.5" width="13" height="13" rx="3.5" stroke="#3F0F3F" />
+    <rect x="19" y="10" width="8" height="7" fill="white" />
+    <path
+      d="M23.2929 10.7071C23.6834 10.3166 24.3166 10.3166 24.7071 10.7071L25.3232 11.3232C25.7137 11.7137 25.7137 12.3469 25.3232 12.7374L18.2834 19.7771C18.0947 19.9658 17.8383 20.0713 17.5714 20.07L16.4633 20.0645C16.1891 20.0632 15.9671 19.8412 15.9657 19.567L15.9603 18.4588C15.959 18.1919 16.0644 17.9356 16.2532 17.7468L23.2929 10.7071Z"
+      stroke="#3F0F3F"
+    />
+    <circle cx="24.5" cy="17.5" r="0.5" fill="#3F0F3F" />
+    <line
+      x1="22.3536"
+      y1="11.6464"
+      x2="24.4749"
+      y2="13.7678"
+      stroke="#3F0F3F"
+    />
+    <circle cx="19.5" cy="11.5" r="0.5" fill="#3F0F3F" />
+  </svg>
+);
+
+export const HashIcon = ({ active }: { active: boolean }) => (
+  <svg
+    width="10"
     height="13"
-    rx="3.5"
-    stroke="#3F0F3F"
-  />
-  <rect x="19" y="10" width="8" height="7" fill="white" />
-  <path
-    d="M23.2929 10.7071C23.6834 10.3166 24.3166 10.3166 24.7071 10.7071L25.3232 11.3232C25.7137 11.7137 25.7137 12.3469 25.3232 12.7374L18.2834 19.7771C18.0947 19.9658 17.8383 20.0713 17.5714 20.07L16.4633 20.0645C16.1891 20.0632 15.9671 19.8412 15.9657 19.567L15.9603 18.4588C15.959 18.1919 16.0644 17.9356 16.2532 17.7468L23.2929 10.7071Z"
-    stroke="#3F0F3F"
-  />
-  <circle cx="24.5" cy="17.5" r="0.5" fill="#3F0F3F" />
-  <line
-    x1="22.3536"
-    y1="11.6464"
-    x2="24.4749"
-    y2="13.7678"
-    stroke="#3F0F3F"
-  />
-  <circle cx="19.5" cy="11.5" r="0.5" fill="#3F0F3F" />
-</svg>
-)
+    viewBox="0 0 10 13"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g opacity={active?"1.0":"0.7"}>
+      <line
+        x1="1.5"
+        y1="4.45142"
+        x2="9.5"
+        y2="4.45142"
+        stroke="white"
+        stroke-linecap="round"
+      />
+      <line
+        x1="0.5"
+        y1="8.40295"
+        x2="8.5"
+        y2="8.40295"
+        stroke="white"
+        stroke-linecap="round"
+      />
+      <path
+        d="M4 1.04431L2.49795 11.9556"
+        stroke="white"
+        stroke-linecap="round"
+      />
+      <path
+        d="M7.50208 1.04443L6.00002 11.9557"
+        stroke="white"
+        stroke-linecap="round"
+      />
+    </g>
+  </svg>
+);
 
-export const HashIcon:FC = () => (
-  <svg width="10" height="13" viewBox="0 0 10 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g opacity="0.7">
-<line x1="1.5" y1="4.45142" x2="9.5" y2="4.45142" stroke="white" stroke-linecap="round"/>
-<line x1="0.5" y1="8.40295" x2="8.5" y2="8.40295" stroke="white" stroke-linecap="round"/>
-<path d="M4 1.04431L2.49795 11.9556" stroke="white" stroke-linecap="round"/>
-<path d="M7.50208 1.04443L6.00002 11.9557" stroke="white" stroke-linecap="round"/>
-</g>
-</svg>
-
-)
-
-export const TimeIcon:FC = () => (
+export const TimeIcon: FC = () => (
   <svg
-                width="19"
-                height="19"
-                viewBox="0 0 19 19"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g opacity="0.7">
-                  <circle
-                    cx="9.5"
-                    cy="9.5"
-                    r="8.5"
-                    stroke="white"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M9.25586 4.84045V9.62854H13.1771"
-                    stroke="white"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </g>
-              </svg>
-)
+    width="19"
+    height="19"
+    viewBox="0 0 19 19"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g opacity="0.7">
+      <circle
+        cx="9.5"
+        cy="9.5"
+        r="8.5"
+        stroke="white"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M9.25586 4.84045V9.62854H13.1771"
+        stroke="white"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </g>
+  </svg>
+);
 
-export const NewUser:FC = () => (
-  <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-<line x1="12.75" y1="13.25" x2="19.25" y2="13.25" stroke="#606060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M12 5.58333C12 8.11464 10.2091 11 8 11C5.79086 11 4 8.11464 4 5.58333C4 3.05203 5.79086 1 8 1C10.2091 1 12 3.05203 12 5.58333Z" stroke="#606060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M12 17H7.5L3 17C1.89543 17 0.968782 16.0773 1.35558 15.0427C1.39822 14.9286 1.44464 14.8156 1.49478 14.7039C1.82144 13.9759 2.30022 13.3145 2.90381 12.7573C3.50739 12.2002 4.22394 11.7582 5.01256 11.4567C5.80117 11.1552 6.64641 11 7.5 11C8.35359 11 8.21138 10.6985 9 11" stroke="#606060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<line x1="15.75" y1="9.75" x2="15.75" y2="16.25" stroke="#606060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-
-)
+export const NewUser: FC = () => (
+  <svg
+    width="20"
+    height="18"
+    viewBox="0 0 20 18"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <line
+      x1="12.75"
+      y1="13.25"
+      x2="19.25"
+      y2="13.25"
+      stroke="#606060"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M12 5.58333C12 8.11464 10.2091 11 8 11C5.79086 11 4 8.11464 4 5.58333C4 3.05203 5.79086 1 8 1C10.2091 1 12 3.05203 12 5.58333Z"
+      stroke="#606060"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M12 17H7.5L3 17C1.89543 17 0.968782 16.0773 1.35558 15.0427C1.39822 14.9286 1.44464 14.8156 1.49478 14.7039C1.82144 13.9759 2.30022 13.3145 2.90381 12.7573C3.50739 12.2002 4.22394 11.7582 5.01256 11.4567C5.80117 11.1552 6.64641 11 7.5 11C8.35359 11 8.21138 10.6985 9 11"
+      stroke="#606060"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <line
+      x1="15.75"
+      y1="9.75"
+      x2="15.75"
+      y2="16.25"
+      stroke="#606060"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+);

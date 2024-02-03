@@ -13,9 +13,11 @@ import { User, Channel } from "@prisma/client";
 export default function Sidebar({
   channels,
   users,
+  conversationId,
 }: {
   users: User[];
   channels: Channel[];
+  conversationId: string;
 }) {
   const [thread, setThread] = useState("");
   const [openChannels, setOpenChannels] = useState(true);
@@ -128,11 +130,23 @@ export default function Sidebar({
           <Collapse isOpened={openChannels}>
             {channels.map((channel: Channel) => (
               <Link
-                className="flex items-center ml-1 mt-2"
+                className={`flex items-center mt-2 ${
+                  conversationId == channel.conversationId
+                    ? " active-sideitem"
+                    : ""
+                }`}
                 href={"/" + channel.conversationId}
               >
-                <HashIcon />
-                <span className="ml-3 opacity-70">{channel.name}</span>
+                <HashIcon active={conversationId == channel.conversationId} />
+                <span
+                  className={`ml-3`}
+                  style={{
+                    opacity:
+                      conversationId == channel.conversationId ? "1" : "0.7",
+                  }}
+                >
+                  {channel.name}
+                </span>
               </Link>
             ))}
 
@@ -161,7 +175,7 @@ export default function Sidebar({
                 className="w-full"
                 onClick={() => startConversation(user)}
               >
-                <div className="flex items-center ml-1 mt-2">
+                <div className="flex items-center mt-2">
                   <img
                     height={18}
                     width={18}

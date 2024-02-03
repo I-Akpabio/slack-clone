@@ -1,9 +1,4 @@
-import {
-  InfoIcon,
-  NewUser,
-  PhoneIcon,
-  StarIcon,
-} from "../components/Icon";
+import { InfoIcon, NewUser, PhoneIcon, StarIcon } from "../components/Icon";
 import Sidebar from "./components/Sidebar";
 import getUsers from "@/app/actions/getUsers";
 import getChannels from "../actions/getChannels";
@@ -16,13 +11,12 @@ export default async function ConversationsLayout({
   params,
   children,
 }: {
-  children: React.ReactNode,
-  params: any
+  children: React.ReactNode;
+  params: any;
 }) {
   const users = await getUsers();
   const channels = await getChannels();
-  const conversation = await getConversationById(params.conversationId)
-
+  const conversation = await getConversationById(params.conversationId);
 
   return (
     <>
@@ -31,7 +25,11 @@ export default async function ConversationsLayout({
         <Nav />
         <div className="grid grid-cols-10">
           <div className="col-span-2 side-menu">
-            <Sidebar users={users} channels={channels} />
+            <Sidebar
+              conversationId={params.conversationId}
+              users={users}
+              channels={channels}
+            />
           </div>
 
           <div className={`col-span-5 col-span-8 p-5 center-container`}>
@@ -66,7 +64,9 @@ export default async function ConversationsLayout({
               <>
                 <div className="flex justify-between w-100 pb-4">
                   <div className="flex items-center">
-                    <span className="mx-3 font-bold"># {conversation.name}</span>
+                    <span className="mx-3 font-bold">
+                      # {conversation.name}
+                    </span>
                     <StarIcon />
                   </div>
 
