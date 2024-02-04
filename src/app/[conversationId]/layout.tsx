@@ -6,6 +6,9 @@ import ChatMessage from "../components/ChatMessage";
 import Time from "../components/Time";
 import Nav from "./components/Nav";
 import getConversationById from "../actions/getConversationById";
+import MessageBox from "./components/MessageBox";
+import getCurrentUser from "../actions/getCurrentUser";
+import getMessages from "../actions/getMessages";
 
 export default async function ConversationsLayout({
   params,
@@ -18,6 +21,12 @@ export default async function ConversationsLayout({
   const channels = await getChannels();
   const conversation = await getConversationById(params.conversationId);
 
+  const currentUser = await getCurrentUser();
+
+  const messages = await getMessages(params.conversationId);
+
+  console.log(conversation);
+
   return (
     <>
       {" "}
@@ -26,14 +35,15 @@ export default async function ConversationsLayout({
         <div className="grid grid-cols-10">
           <div className="col-span-2 side-menu">
             <Sidebar
-              conversationId={params.conversationId}
               users={users}
               channels={channels}
+              currentUser={currentUser}
+              conversationId={params.conversationId}
             />
           </div>
 
           <div className={`col-span-5 col-span-8 p-5 center-container`}>
-            {conversation.isGroup ? (
+            {conversation?.isGroup ? (
               <div
                 className="flex justify-between w-100 pb-4"
                 style={{ borderBottom: "1px solid rgba(0,0,0,0.3)" }}
@@ -65,7 +75,7 @@ export default async function ConversationsLayout({
                 <div className="flex justify-between w-100 pb-4">
                   <div className="flex items-center">
                     <span className="mx-3 font-bold">
-                      # {conversation.name}
+                      # {conversation?.name}
                     </span>
                     <StarIcon />
                   </div>
@@ -89,21 +99,11 @@ export default async function ConversationsLayout({
             <div className="main-section">
               <Time />
 
-              <ChatMessage name="Jane addams" image={"profile4.png"} />
+              {messages.map((message: any) => (
+                <ChatMessage message={message} />
+              ))}
 
-              <ChatMessage />
-
-              <Time />
-
-              <ChatMessage />
-
-              <ChatMessage message={"Hello"} />
-
-              <input
-                className="mt-5"
-                type="text"
-                placeholder="type Message here"
-              />
+              <MessageBox conversationId={params.conversationId} />
 
               {/* <CKEditor
               editor={ ClassicEditor }

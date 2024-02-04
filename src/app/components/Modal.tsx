@@ -95,7 +95,7 @@ export default function MyModal({ setShowModal, showModal }: ModalProps) {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="e.g testing-channel"
-                        className="px-4 py-2 w-full focus:border-0"
+                        className="px-4 py-2 w-full focus:outline-none"
                       />
                     </div>
                   </form>

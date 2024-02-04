@@ -14,10 +14,12 @@ export default function Sidebar({
   channels,
   users,
   conversationId,
+  currentUser
 }: {
   users: User[];
   channels: Channel[];
   conversationId: string;
+  currentUser: any
 }) {
   const [thread, setThread] = useState("");
   const [openChannels, setOpenChannels] = useState(true);
@@ -59,7 +61,7 @@ export default function Sidebar({
         <div className="flex items-center justify-between pr-4">
           <button style={{ opacity: 1 }} className="">
             <span style={{ opacity: 1 }} className="mr-3 main-user">
-              DesiginerKRS
+              {currentUser?.name?.split(" ")[0]}
             </span>
             <FontAwesomeIcon
               style={{ width: "12px", height: "12px" }}
@@ -150,7 +152,7 @@ export default function Sidebar({
               </Link>
             ))}
 
-            <button className=" mt-2" onClick={() => setShowModal(true)}>
+            <button className="mt-2" onClick={() => setShowModal(true)}>
               <div className="flex items-center">
                 <span>
                   <FontAwesomeIcon icon={faPlus} />
@@ -161,7 +163,7 @@ export default function Sidebar({
             </button>
           </Collapse>
 
-          <button className="mt-3" onClick={() => setOpenDirect(!openDirect)}>
+          <button className="mt-4" onClick={() => setOpenDirect(!openDirect)}>
             <div className="flex items-center">
               {" "}
               <BottomArrow />
