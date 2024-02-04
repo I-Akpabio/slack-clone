@@ -1,3 +1,4 @@
+import { connect } from "http2";
 import prisma from "../../libs/prismadb";
 import { NextResponse } from "next/server";
 
@@ -10,9 +11,18 @@ export async function POST(request: Request) {
       return new NextResponse("Missing Credentials");
     }
 
+    const users = await prisma.user.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
     const conversation = await prisma.conversation.create({
       data: {
         name,
+        users: {
+          connect: users.map((user: { id: string }) => ({ id: user.id })),
+        },
       },
     });
 

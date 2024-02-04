@@ -9,6 +9,7 @@ import getConversationById from "../actions/getConversationById";
 import MessageBox from "./components/MessageBox";
 import getCurrentUser from "../actions/getCurrentUser";
 import getMessages from "../actions/getMessages";
+import { Conversation } from "@prisma/client";
 
 export default async function ConversationsLayout({
   params,
@@ -19,7 +20,9 @@ export default async function ConversationsLayout({
 }) {
   const users = await getUsers();
   const channels = await getChannels();
-  const conversation = await getConversationById(params.conversationId);
+  const conversation: Conversation = await getConversationById(
+    params.conversationId
+  );
 
   const currentUser = await getCurrentUser();
 
@@ -82,12 +85,12 @@ export default async function ConversationsLayout({
 
                   <div className="flex items-center">
                     <div className="flex mr-2">
-                      <img width={24} height={24} src="profile.png" alt="" />
-                      <img width={24} height={24} src="profile2.png" alt="" />
-                      <img width={24} height={24} src="profile4.png" alt="" />
+                      {conversation.users.map((x: any) => (
+                        <div className="text-center pb-1 ml-1" style={{width: '20px', height:'20px', background:'rgba(0,151,167,255)', color:'white'}}>I</div>
+                      ))}
                     </div>
 
-                    <span className="mr-3">23</span>
+                    <span className="mr-3">{conversation.users.length}</span>
 
                     <NewUser />
                   </div>
