@@ -1,16 +1,16 @@
 import { NextResponse } from "next/server";
 import prisma from "@/app/libs/prismadb";
+import getCurrentUser from "@/app/actions/getCurrentUser";
 
 export async function POST(request: Request) {
   try {
-    // const currentUser =  await getCurrentUser();
+    const currentUser =  await getCurrentUser();
     const body = await request.json();
 
-    const currentUser = {id: '65b9792ab826e522a3fc9bd6'}
 
     const { userId, isDirect, members, name } = body;
 
-    if (!isDirect) {
+    if (! isDirect) {
       const conversation = await prisma.conversation.create({
         data: {
           name,

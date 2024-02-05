@@ -80,6 +80,34 @@ nav input {
   line-height: normal;
 }
 
+.avatar {
+  background-color: rgb(0, 151, 167);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin-right: 0.6rem;
+  border-radius: 5px;
+  font-size: 1.3rem;
+}
+
+.avatar.medium {
+  width: 28px;
+  height: 28px;
+  font-size: 1rem;
+}
+
+
+.avatar.small {
+  width: 20px;
+  height: 20px;
+  font-size: 0.7rem;
+  margin-right: 2px;
+}
+
+
 .ReactCollapse--collapse {
   transition: height 300ms;
 }

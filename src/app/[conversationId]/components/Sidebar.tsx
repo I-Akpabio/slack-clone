@@ -6,26 +6,32 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import React from "react";
 import { Collapse } from "react-collapse";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import axios from "axios";
 import { User, Channel } from "@prisma/client";
+import Avatar from "./Avatar";
 
 export default function Sidebar({
   channels,
   users,
   conversationId,
-  currentUser
+  currentUser,
+  conversation,
 }: {
   users: User[];
   channels: Channel[];
   conversationId: string;
-  currentUser: any
+  currentUser: any;
+  conversation: any;
 }) {
   const [thread, setThread] = useState("");
   const [openChannels, setOpenChannels] = useState(true);
   const [openDirect, setOpenDirect] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [user, setUser] = useState({});
+
+  const router = useRouter();
 
   const startConversation = (user: User) => {
     axios
@@ -36,10 +42,24 @@ export default function Sidebar({
       })
       .then((res: any) => {
         console.log(res);
+        router.push("/" + res.data.id);
         if (res.status == 200) {
           setUser(res);
         }
       });
+  };
+
+  const isOther = (id: string) => {
+    if(conversation.isGroup) return false;
+    let res = false;
+
+    conversation.users.forEach((element: User) => {
+      if (element.id == id) res = true;
+    });
+
+    if (id == currentUser.id) res = false;
+
+    return res;
   };
 
   return (
@@ -93,7 +113,7 @@ export default function Sidebar({
               />
             </svg>
 
-            <span className="ml-4">Mentions & reactions</span>
+            <span className="ml-2">Mentions & reactions</span>
           </div>
 
           <div className="flex items-center mb-1">
@@ -114,7 +134,7 @@ export default function Sidebar({
               />
             </svg>
 
-            <span className="ml-4">Saved items</span>
+            <span className="ml-2">Saved items</span>
           </div>
 
           <hr className="my-4 opacity-30" />
@@ -125,7 +145,7 @@ export default function Sidebar({
             <div className="flex items-center">
               {" "}
               <BottomArrow />
-              <span className="ml-4">Channels</span>
+              <span className="ml-3">Channels</span>
             </div>
           </button>
 
@@ -141,7 +161,7 @@ export default function Sidebar({
               >
                 <HashIcon active={conversationId == channel.conversationId} />
                 <span
-                  className={`ml-3`}
+                  className={`ml-2`}
                   style={{
                     opacity:
                       conversationId == channel.conversationId ? "1" : "0.7",
@@ -164,7 +184,7 @@ export default function Sidebar({
           </Collapse>
 
           <button className="mt-4" onClick={() => setOpenDirect(!openDirect)}>
-            <div className="flex items-center">
+            <div className={`flex items-center`}>
               {" "}
               <BottomArrow />
               <span className="ml-4">Direct Messages</span>
@@ -172,20 +192,33 @@ export default function Sidebar({
           </button>
 
           <Collapse isOpened={openDirect}>
-            {users.map((user: { name: string }) => (
+            {users.map((user: {id: string, name: string; image: string }) => (
               <button
-                className="w-full"
+                className={`w-full ${
+                  isOther(user.id) ? "active-sideitem mt-2" : ""
+                }`}
                 onClick={() => startConversation(user)}
               >
-                <div className="flex items-center mt-2">
-                  <img
-                    height={18}
-                    width={18}
-                    className="self-center mr-2"
-                    src="profile2.png"
-                    alt=""
-                  />
-                  <span>{user.name}</span>
+                <div className={`flex items-center ${
+                  isOther(user.id) ? "" : "mt-2"
+                }`}>
+                  {user.image ? (
+                    <img
+                      height={18}
+                      width={18}
+                      className="self-center"
+                      src="profile2.png"
+                      alt=""
+                    />
+                  ) : (
+                    <Avatar
+                      text={user.name[0]}
+                      size="small"
+                      showActive={false}
+                    />
+                  )}
+
+                  <span className="ml-2">{user.name}</span>
                 </div>
               </button>
             ))}

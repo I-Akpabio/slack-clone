@@ -9,7 +9,8 @@ import getConversationById from "../actions/getConversationById";
 import MessageBox from "./components/MessageBox";
 import getCurrentUser from "../actions/getCurrentUser";
 import getMessages from "../actions/getMessages";
-import { Conversation } from "@prisma/client";
+import { Conversation, User } from "@prisma/client";
+import Avatar from "./components/Avatar";
 
 export default async function ConversationsLayout({
   params,
@@ -28,13 +29,23 @@ export default async function ConversationsLayout({
 
   const messages = await getMessages(params.conversationId);
 
-  console.log(conversation);
+  const otherUser = () => {
+    let other = "";
+
+    conversation.users.forEach((element: User) => {
+      if (element.id != currentUser.id) other = element.name;
+    });
+
+    return other;
+  };
+
+  const other = otherUser();
 
   return (
     <>
       {" "}
       <main className="">
-        <Nav />
+        <Nav currentUser={currentUser} />
         <div className="grid grid-cols-10">
           <div className="col-span-2 side-menu">
             <Sidebar
@@ -42,11 +53,12 @@ export default async function ConversationsLayout({
               channels={channels}
               currentUser={currentUser}
               conversationId={params.conversationId}
+              conversation={conversation}
             />
           </div>
 
           <div className={`col-span-5 col-span-8 p-5 center-container`}>
-            {conversation?.isGroup ? (
+            {!conversation?.isGroup ? (
               <div
                 className="flex justify-between w-100 pb-4"
                 style={{ borderBottom: "1px solid rgba(0,0,0,0.3)" }}
@@ -61,8 +73,8 @@ export default async function ConversationsLayout({
                   >
                     <circle cx="4" cy="4" r="4" fill="#34785C" />
                   </svg>
-                  <span className="mx-3 font-bold">Jane </span>
-                  <StarIcon />
+                  <span className="mx-3 font-bold">{other} </span>
+                 
                 </div>
 
                 <div className="flex">
@@ -85,8 +97,8 @@ export default async function ConversationsLayout({
 
                   <div className="flex items-center">
                     <div className="flex mr-2">
-                      {conversation.users.map((x: any) => (
-                        <div className="text-center pb-1 ml-1" style={{width: '20px', height:'20px', background:'rgba(0,151,167,255)', color:'white'}}>I</div>
+                      {conversation.users.map((user: any) => (
+                        <Avatar text={user.name[0]} size="small" />
                       ))}
                     </div>
 

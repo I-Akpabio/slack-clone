@@ -1,6 +1,8 @@
 import { TimeIcon } from "@/app/components/Icon"
+import { User } from "@prisma/client"
+import Avatar from "./Avatar"
 
-const Nav = () => (<nav>
+const Nav = ({currentUser}:{currentUser: User}) => (<nav>
   <div className="grid grid-cols-10 py-2">
     <div className="col-span-2">
       <div className="flex justify-end pr-5 pt-2">
@@ -19,7 +21,7 @@ const Nav = () => (<nav>
           />
         </div>
 
-        <img src="/profile3.png" />
+        <Avatar text={currentUser.name[0]} size="medium" />
       </div>
     </div>
   </div>
