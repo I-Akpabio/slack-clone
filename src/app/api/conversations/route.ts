@@ -4,12 +4,12 @@ import getCurrentUser from "@/app/actions/getCurrentUser";
 
 export async function POST(request: Request) {
   try {
-    const currentUser =  await getCurrentUser();
+    const currentUser = await getCurrentUser();
     const body = await request.json();
 
     const { userId, isDirect, members, name } = body;
 
-    if (! isDirect) {
+    if (!isDirect) {
       const conversation = await prisma.conversation.create({
         data: {
           isGroup: true,
@@ -17,7 +17,44 @@ export async function POST(request: Request) {
         },
       });
 
-      return NextResponse.json(conversation)
+      return NextResponse.json(conversation);
+    }
+
+    if (userId == currentUser.id) {
+      const existingSingleConversations = await prisma.conversation.findMany({
+        where: {
+          isGroup: false,
+          userIds: {
+            equals: [currentUser.id],
+          },
+        },
+        include: {
+          users: true,
+        },
+      });
+
+      const singleConversation = existingSingleConversations[0];
+
+      if (singleConversation) {
+        return NextResponse.json(singleConversation);
+      } else {
+        const newConversation = await prisma.conversation.create({
+          data: {
+            isGroup: false,
+            users: {
+              connect: [
+                {
+                  id: currentUser.id,
+                },
+              ],
+            },
+          },
+          include: {
+            users: true,
+          },
+        });
+        return NextResponse.json(newConversation);
+      }
     }
 
     const existingConversations = await prisma.conversation.findMany({
@@ -26,24 +63,19 @@ export async function POST(request: Request) {
         OR: [
           {
             userIds: {
-              equals: [currentUser.id]
-            }
+              equals: [currentUser.id, userId],
+            },
           },
           {
             userIds: {
-              equals: [currentUser.id, userId]
-            }
+              equals: [userId, currentUser.id],
+            },
           },
-          {
-            userIds: {
-              equals: [userId, currentUser.id]
-            }
-          }
-        ]
+        ],
       },
       include: {
-        users:true
-      }
+        users: true,
+      },
     });
 
     const singleConversation = existingConversations[0];
@@ -58,17 +90,17 @@ export async function POST(request: Request) {
         users: {
           connect: [
             {
-              id: currentUser.id
+              id: currentUser.id,
             },
             {
-              id: userId
-            }
-          ]
-        }
+              id: userId,
+            },
+          ],
+        },
       },
       include: {
-        users: true
-      }
+        users: true,
+      },
     });
 
     // Update all connections with new conversation
@@ -78,9 +110,7 @@ export async function POST(request: Request) {
     //   }
     // });
 
-    return NextResponse.json(newConversation)
-
-    
+    return NextResponse.json(newConversation);
   } catch (error: any) {
     return new NextResponse("Internal Error", { status: 500 });
   }

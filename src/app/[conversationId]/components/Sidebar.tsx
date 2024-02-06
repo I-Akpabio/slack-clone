@@ -25,7 +25,7 @@ export default function Sidebar({
   currentUser: any;
   conversation: any;
 }) {
-  const [thread, setThread] = useState("");
+
   const [openChannels, setOpenChannels] = useState(true);
   const [openDirect, setOpenDirect] = useState(true);
   const [showModal, setShowModal] = useState(false);
