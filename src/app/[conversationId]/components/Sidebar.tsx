@@ -21,9 +21,9 @@ export default function Sidebar({
 }: {
   users: User[];
   channels: Channel[];
-  conversationId: string;
-  currentUser: any;
-  conversation: any;
+  conversationId?: string;
+  currentUser?: any;
+  conversation?: any;
 }) {
 
   const [openChannels, setOpenChannels] = useState(true);

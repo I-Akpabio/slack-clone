@@ -37,7 +37,7 @@ export default async function Home() {
         </div>
       </nav>
 
-      <AppRoot users={users} channels={channels} />
+      {/* <AppRoot users={users} channels={channels} /> */}
     </main>
   );
 }

@@ -18,8 +18,8 @@ const AppRoot = ({
   users,
   channels,
 }: {
-  users: User[];
-  channels: Channel[];
+  users: any;
+  channels: any;
 }) => {
 
 

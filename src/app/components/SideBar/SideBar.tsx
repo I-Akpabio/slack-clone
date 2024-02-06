@@ -11,7 +11,7 @@ async function Sidebar({ children }: { children?: React.ReactNode }) {
 
   return (
     <>
-      {users.map((user) => (
+      {users.map((user:any) => (
         <>{user.name}</>
       ))}
     </>

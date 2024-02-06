@@ -142,7 +142,7 @@ const AppWithThread = ({
               <Collapse isOpened={openChannels}>
                 {channels.map((channel: any) => (
                   <button className="flex items-center ml-1  mt-2">
-                    <HashIcon />
+                    <HashIcon active={false} />
                     <span className="ml-3 opacity-70">{channel.name}</span>
                   </button>
                 ))}
