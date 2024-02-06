@@ -12,7 +12,7 @@ const ChatMessage = ({
   message?: any;
   image?: any;
 }) => (
-  <div className="flex mt-3">
+  <div className="flex mt-3 mb-2">
     {message.sender.image ? (
       <img
         width={36}

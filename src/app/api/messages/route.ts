@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import prisma from "@/app/libs/prismadb";
+import { pusherServer } from "@/app/libs/pusher";
 
 export async function POST(request: Request) {
   try {
@@ -33,25 +34,42 @@ export async function POST(request: Request) {
       },
     });
 
-    const updatedConversation  =  await prisma.conversation.update({
+    const updatedConversation = await prisma.conversation.update({
       where: {
-        id: conversationId
+        id: conversationId,
       },
       data: {
         lastMessageAt: new Date(),
         messages: {
-          connect: [{
-            id: newMessage.id
-          }]
-        }
-      }, 
+          connect: [
+            {
+              id: newMessage.id,
+            },
+          ],
+        },
+      },
       include: {
         users: true,
-      }
-    })
+        messages:true
+      },
+    });
 
-    return NextResponse.json(updatedConversation)
+    await pusherServer.trigger(conversationId, "messages:new", newMessage);
+
+    const lastMessage =
+      updatedConversation.messages[updatedConversation.messages.length - 1];
+
+    updatedConversation.users.map((user: any) => {
+      pusherServer.trigger(user.email, "conversation:update", {
+        id: conversationId,
+        messages: [lastMessage],
+      });
+    });
+
+    return NextResponse.json(updatedConversation);
   } catch (error: any) {
     console.log(error, "ERROR_MESSAGE");
+
+    return new NextResponse("Error", {status: 400});
   }
 }

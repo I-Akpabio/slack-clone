@@ -50,9 +50,17 @@ export default function Sidebar({
   };
 
   const isOther = (id: string) => {
-    if(conversation.isGroup) return false;
+    if (conversation?.isGroup) return false;
+    if (
+      !conversation?.isGroup &&
+      conversation?.users?.length == 1 &&
+      id == currentUser?.id
+    )
+      return true;
+
     let res = false;
 
+    if(!conversation) return false
     conversation.users.forEach((element: User) => {
       if (element.id == id) res = true;
     });
@@ -113,7 +121,7 @@ export default function Sidebar({
               />
             </svg>
 
-            <span className="ml-2">Mentions & reactions</span>
+            <span className="ml-2">Mentions & Reactions</span>
           </div>
 
           <div className="flex items-center mb-1">
@@ -192,16 +200,18 @@ export default function Sidebar({
           </button>
 
           <Collapse isOpened={openDirect}>
-            {users.map((user: {id: string, name: string; image: string }) => (
+            {users.map((user: { id: string; name: string; image: string }) => (
               <button
                 className={`w-full ${
                   isOther(user.id) ? "active-sideitem mt-2" : ""
                 }`}
                 onClick={() => startConversation(user)}
               >
-                <div className={`flex items-center ${
-                  isOther(user.id) ? "" : "mt-2"
-                }`}>
+                <div
+                  className={`flex items-center ${
+                    isOther(user.id) ? "" : "mt-2"
+                  }`}
+                >
                   {user.image ? (
                     <img
                       height={18}

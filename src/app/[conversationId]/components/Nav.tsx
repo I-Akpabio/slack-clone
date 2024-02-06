@@ -1,6 +1,7 @@
 import { TimeIcon } from "@/app/components/Icon"
 import { User } from "@prisma/client"
 import Avatar from "./Avatar"
+import { Dropdown } from 'flowbite-react';
 
 const Nav = ({currentUser}:{currentUser: User}) => (<nav>
   <div className="grid grid-cols-10 py-2">

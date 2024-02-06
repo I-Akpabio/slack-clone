@@ -7,12 +7,12 @@ export async function POST(request: Request) {
     const currentUser =  await getCurrentUser();
     const body = await request.json();
 
-
     const { userId, isDirect, members, name } = body;
 
     if (! isDirect) {
       const conversation = await prisma.conversation.create({
         data: {
+          isGroup: true,
           name,
         },
       });
@@ -22,7 +22,13 @@ export async function POST(request: Request) {
 
     const existingConversations = await prisma.conversation.findMany({
       where: {
+        isGroup: false,
         OR: [
+          {
+            userIds: {
+              equals: [currentUser.id]
+            }
+          },
           {
             userIds: {
               equals: [currentUser.id, userId]
