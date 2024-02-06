@@ -15,8 +15,7 @@ export default async function ConversationsLayout({
   children: React.ReactNode;
   params: any;
 }) {
-  const users:any = []
-  //await getUsers();
+  const users:any = await getUsers();
   const channels:any = await getChannels();
   const conversation: Conversation = await getConversationById(
     params.conversationId
@@ -24,8 +23,7 @@ export default async function ConversationsLayout({
 
   const currentUser = await getCurrentUser();
 
-  const messages:any = []
-  //await getMessages(params.conversationId);
+  const messages:any = await getMessages(params.conversationId);
 
   return (
     <>
