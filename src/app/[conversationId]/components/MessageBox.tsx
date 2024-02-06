@@ -4,6 +4,12 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
+const style = {
+  position: 'absolute',
+  bottom: '13px',
+  width: '88%'
+}
+
 function MessageBox(props: any) {
   const [msg, setMsg] = useState("");
 
@@ -30,7 +36,11 @@ function MessageBox(props: any) {
   };
 
   return (
-    <div className="flex items-end">
+    <div className="flex items-end" style={{
+      position: 'absolute',
+      bottom: '13px',
+      width: '76%'
+    }}>
       <input
         onChange={(e) => setMsg(e.target.value)}
         onKeyDown={onChange}

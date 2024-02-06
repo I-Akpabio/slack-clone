@@ -24,12 +24,11 @@ const Forum = ({
 }) => {
   const [messageList, setMessageList] = useState(messages);
 
-
   useEffect(() => {
     pusherClient.subscribe(conversationId);
 
     const messageHandler = (message: any) => {
-      console.log("got message")
+      console.log("got message");
       setMessageList((current: any) => {
         if (find(current, { id: message.id })) {
           return current;
@@ -48,7 +47,7 @@ const Forum = ({
   }, [conversationId]);
 
   const otherUser = () => {
-    if(!conversation) return ""
+    if (!conversation) return "";
     let other = "";
 
     if (conversation.users.length == 1 && !conversation.isGroup) {
@@ -132,11 +131,12 @@ const Forum = ({
       )}
 
       <div className="main-section">
-        <Time />
-
-        {messageList.map((message: any) => (
-          <ChatMessage message={message} />
-        ))}
+        <div className="messages-container">
+          <Time />
+          {messageList.map((message: any) => (
+            <ChatMessage message={message} />
+          ))}
+        </div>
 
         <MessageBox
           addNewMessage={addNewMessage}

@@ -41,7 +41,7 @@ export default async function ConversationsLayout({
             />
           </div>
 
-          <div className={`col-span-5 col-span-8 p-5 center-container`}>
+          <div className={`col-span-5 col-span-8 px-5 pt-5 center-container`}>
             <Forum
               conversationId={params.conversationId}
               conversation={conversation}

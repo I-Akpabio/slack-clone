@@ -169,7 +169,7 @@ export default function Sidebar({
               >
                 <HashIcon active={conversationId == channel.conversationId} />
                 <span
-                  className={`ml-2`}
+                  className={`ml-3`}
                   style={{
                     opacity:
                       conversationId == channel.conversationId ? "1" : "0.7",
@@ -186,7 +186,7 @@ export default function Sidebar({
                   <FontAwesomeIcon icon={faPlus} />
                 </span>
 
-                <span className="ml-3 opacity-70">Create Channel</span>
+                <span className="ml-2 opacity-70">Create Channel</span>
               </div>
             </button>
           </Collapse>
@@ -195,7 +195,7 @@ export default function Sidebar({
             <div className={`flex items-center`}>
               {" "}
               <BottomArrow />
-              <span className="ml-4">Direct Messages</span>
+              <span className="ml-2">Direct Messages</span>
             </div>
           </button>
 
@@ -228,7 +228,7 @@ export default function Sidebar({
                     />
                   )}
 
-                  <span className="ml-2">{user.name}</span>
+                  <span className="ml-1">{user.name}</span>
                 </div>
               </button>
             ))}
