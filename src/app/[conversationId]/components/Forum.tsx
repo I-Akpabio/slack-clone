@@ -115,13 +115,15 @@ const Forum = ({
             </div>
 
             <div className="flex items-center">
-              <div className="flex mr-2">
-                {conversation.users.map((user: any) => (
-                  <Avatar text={user.name[0]} size="small" />
-                ))}
-              </div>
+            <button className="flex items-center">
 
-              <span className="mr-3">{conversation.users.length}</span>
+            <Avatar text={currentUser.name[0]} size="small" />
+                
+              
+
+                <span className="mr-3 ml-2">{conversation.users.length}</span>
+            </button>
+               
 
               <NewUser />
             </div>

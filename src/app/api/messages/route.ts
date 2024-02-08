@@ -50,7 +50,7 @@ export async function POST(request: Request) {
       },
       include: {
         users: true,
-        messages:true
+        messages: true,
       },
     });
 
@@ -59,17 +59,39 @@ export async function POST(request: Request) {
     const lastMessage =
       updatedConversation.messages[updatedConversation.messages.length - 1];
 
-    updatedConversation.users.map((user: any) => {
-      pusherServer.trigger(user.email, "conversation:update", {
-        id: conversationId,
-        messages: [lastMessage],
+    // updatedConversation.users.map((user: any) => {
+    //   pusherServer.trigger(user.email, "conversation:update", {
+    //     id: conversationId,
+    //     messages: [lastMessage],
+    //   });
+    // });
+
+    const other = updatedConversation.users.filter(
+      (user: any) => user.email != currentUser.email
+    );
+
+    console.log(other)
+
+    if (updatedConversation.isGroup) {
+      other.map((user: any) => {
+        pusherServer.trigger(user.email, "conversation:update", {
+          isGroup: true,
+          conversationId: conversationId,
+        });
       });
-    });
+    } else {
+      const otherEmail = other.length > 0 ? other[0].email : currentUser.email;
+
+      pusherServer.trigger(otherEmail, "conversation:update", {
+        isGroup: false,
+        sender: currentUser.email,
+      });
+    }
 
     return NextResponse.json(updatedConversation);
   } catch (error: any) {
     console.log(error, "ERROR_MESSAGE");
 
-    return new NextResponse("Error", {status: 400});
+    return new NextResponse("Error", { status: 400 });
   }
 }

@@ -61,7 +61,7 @@ nav input {
   display: flex;
   flex-direction: column;
   justify-content: end;
-  height: 81%;
+  height: 60%;
 }
 
 .messages-container {
@@ -74,6 +74,7 @@ nav input {
   padding-bottom: 1rem;
   padding-top: 1rem;
 }
+
 .time-text {
   border-radius: 4.4375rem;
   border: 1px solid #dfdfdf;
@@ -140,9 +141,27 @@ nav input {
   font-weight: 400;
   line-height: 142%;
 }
-.side-menu p,
-.side-menu span {
+.side-menu p {
   opacity: 0.7;
+}
+
+.side-menu a {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}
+
+.side-menu a:hover {
+  background-color: rgba(128, 128, 128, 0.4);
+  margin-left: -16px;
+  padding-left: 16px;
+  border-radius: 10px;
+}
+
+.side-menu .button-link:hover {
+  background-color: rgba(128, 128, 128, 0.4);
+  margin-left: -16px;
+  padding-left: 16px;
+  border-radius: 10px;
 }
 
 .active-sideitem {
@@ -152,6 +171,17 @@ nav input {
   padding-top: 0.2rem;
   padding-bottom: 0.2rem;
   border-radius: 10px;
+}
+
+.conversation-link {
+  opacity: 0.7;
+}
+
+.conversation-link.active {
+  opacity: 1;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
 }
 
 .message-input {
