@@ -75,7 +75,7 @@ export async function POST(request: Request) {
       (user: any) => user.email != currentUser.email
     );
 
-    console.log(other)
+    // console.log(other)
 
     if (updatedConversation.isGroup) {
       other.map((user: any) => {

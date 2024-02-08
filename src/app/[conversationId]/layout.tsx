@@ -8,6 +8,7 @@ import getUsersWithConversation from "../actions/getUserWithConversations";
 import getMessages from "../actions/getMessages";
 import { Conversation, User } from "@prisma/client";
 import Forum from "./components/Forum";
+import getChannelsWithConversation from "../actions/getChannelsWithConversation";
 
 export default async function ConversationsLayout({
   params,
@@ -17,7 +18,7 @@ export default async function ConversationsLayout({
   params: any;
 }) {
   const users:any = await getUsers();
-  const channels:any = await getChannels();
+  const channels:any = await getChannelsWithConversation();
   const conversation: Conversation = await getConversationById(
     params.conversationId
   );
@@ -26,7 +27,7 @@ export default async function ConversationsLayout({
 
   const messages:any = await getMessages(params.conversationId);
 
-  const usersWithConversaion = await getUsersWithConversation()
+  const usersWithConversation = await getUsersWithConversation()
   return (
     <>
       {" "}
@@ -40,7 +41,7 @@ export default async function ConversationsLayout({
               currentUser={currentUser}
               conversationId={params.conversationId}
               conversation={conversation}
-              usersWithConversaion={usersWithConversaion}
+              usersWithConversation={usersWithConversation}
             />
           </div>
 
