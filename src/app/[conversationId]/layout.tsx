@@ -27,8 +27,6 @@ export default async function ConversationsLayout({
   const messages:any = await getMessages(params.conversationId);
 
   const usersWithConversaion = await getUsersWithConversation()
-  console.log(usersWithConversaion)
-
   return (
     <>
       {" "}
@@ -42,6 +40,7 @@ export default async function ConversationsLayout({
               currentUser={currentUser}
               conversationId={params.conversationId}
               conversation={conversation}
+              usersWithConversaion={usersWithConversaion}
             />
           </div>
 

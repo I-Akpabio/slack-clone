@@ -14,6 +14,7 @@ const getUsersWithConversation = async () => {
       },
     });
 
+  
     const usersWithConversation = users.map(async (user: any) => {
       const existingConversations = await prisma.conversation.findMany({
         where: {
@@ -43,7 +44,9 @@ const getUsersWithConversation = async () => {
       }
     });
 
-    return usersWithConversation;
+    const numFruits = await Promise.all(usersWithConversation)
+
+    return numFruits;
   } catch (e: any) {
     console.log(e);
     return ["error"];

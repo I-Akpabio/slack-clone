@@ -19,12 +19,14 @@ export default function Sidebar({
   conversationId,
   currentUser,
   conversation,
+  usersWithConversaion
 }: {
   users: User[];
   channels: Channel[];
   conversationId: string;
   currentUser?: any;
   conversation?: any;
+  usersWithConversaion: any
 }) {
   const [openChannels, setOpenChannels] = useState(true);
   const [openDirect, setOpenDirect] = useState(true);
@@ -34,7 +36,7 @@ export default function Sidebar({
 
   const router = useRouter();
 
-  console.log(users);
+  console.log(usersWithConversaion);
 
   useEffect(() => {
     if (!currentUser.email) return;
