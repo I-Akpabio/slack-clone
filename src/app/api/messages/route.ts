@@ -28,6 +28,11 @@ export async function POST(request: Request) {
             id: currentUser.id,
           },
         },
+        seen: {
+          connect: {
+            id: currentUser.id
+          }
+        },
       },
       include: {
         sender: true,
