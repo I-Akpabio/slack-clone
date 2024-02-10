@@ -166,7 +166,7 @@ export default function UserListModal({
                                   className="text-sm"
                                   style={{ color: "blue" }}
                                   onClick={() =>
-                                    setShowSubModal("EDIT_CHANNEL")
+                                    setShowSubModal("EDIT_DESCRIPTION")
                                   }
                                 >
                                   Edit

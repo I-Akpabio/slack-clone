@@ -36,7 +36,7 @@ export default function Sidebar({
 
   useEffect(() => {
     if (!currentUser.email) return;
-    pusherClient.subscribe(currentUser.email);
+    // pusherClient.subscribe(currentUser.email);
 
     const messageHandler = (message: any) => {
       console.log(message);
@@ -62,12 +62,12 @@ export default function Sidebar({
       }
     };
 
-    pusherClient.bind("conversation:update", messageHandler);
+    // pusherClient.bind("conversation:update", messageHandler);
 
-    return () => {
-      pusherClient.unsubscribe(currentUser.email);
-      pusherClient.unbind("conversation:update", messageHandler);
-    };
+    // return () => {
+    //   pusherClient.unsubscribe(currentUser.email);
+    //   pusherClient.unbind("conversation:update", messageHandler);
+    // };
   }, [currentUser.email]);
 
   const startConversation = (user: User) => {

@@ -20,11 +20,13 @@ const Forum = ({
   conversation,
   conversationId,
   messages,
+  hasExtra,
 }: {
   conversation: any;
   currentUser: any;
   conversationId: string;
   messages: any;
+  hasExtra: boolean;
 }) => {
   const [messageList, setMessageList] = useState(messages);
   const [showModal, setShowModal] = useState(false);
@@ -44,7 +46,7 @@ const Forum = ({
   }, []);
 
   useEffect(() => {
-    pusherClient.subscribe(conversationId);
+    // pusherClient.subscribe(conversationId);
 
     const messageHandler = (message: any) => {
       console.log("got message");
@@ -57,12 +59,12 @@ const Forum = ({
       });
     };
 
-    pusherClient.bind("messages:new", messageHandler);
+    // pusherClient.bind("messages:new", messageHandler);
 
-    return () => {
-      pusherClient.unsubscribe(conversationId);
-      pusherClient.unbind("messages:new", messageHandler);
-    };
+    // return () => {
+    //   pusherClient.unsubscribe(conversationId);
+    //   pusherClient.unbind("messages:new", messageHandler);
+    // };
   }, [conversationId]);
 
   const otherUser = () => {
@@ -97,12 +99,17 @@ const Forum = ({
 
   const other = otherUser();
 
+  const _setShowModal = (item: any) => {
+    if (subModal && !item) return;
+    setShowModal(item);
+  };
+
   return (
     <>
       <UserListModal
         currentUser={currentUser}
-        setShowModal={setShowModal}
-        showModal={true}
+        setShowModal={_setShowModal}
+        showModal={showModal}
         setShowSubModal={setShowSubModal}
       />
 
@@ -143,7 +150,10 @@ const Forum = ({
             </div>
 
             <div className="flex items-center">
-              <button className="flex items-center">
+              <button
+                className="flex items-center"
+                onClick={() => setShowModal(true)}
+              >
                 <Avatar text={currentUser.name[0]} size="small" />
 
                 <span className="mr-3 ml-2">{conversation.users.length}</span>
@@ -165,6 +175,7 @@ const Forum = ({
         </div>
 
         <MessageBox
+          hasExtra={hasExtra}
           addNewMessage={addNewMessage}
           conversationId={conversationId}
         />
