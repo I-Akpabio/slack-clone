@@ -17,9 +17,12 @@ const RenameChannelModal = ({
       closeModal={closeModal}
       title="Rename Channel"
     >
-      <div className="p-6">
+      <div className="px-6 pb-6 pt-3">
         <form action="">
-          <label htmlFor="">Channel Name</label> <br />
+          <label className="text-sm font-semibold text-gray-600" htmlFor="">
+            Channel Name
+          </label>{" "}
+          <br />
           <div
             className="border-grey-200 mt-3 flex items-center"
             style={{ borderWidth: "1px" }}
@@ -39,17 +42,18 @@ const RenameChannelModal = ({
           </div>
         </form>
 
-        <p className="light-1">
-          Channels are where conversations happen around a topic. Use a name
-          that is easy to find and understand.
+        <p className="light-1 mt-1">
+          Names must be lowercase, without spaces or periods, and can’t be
+          longer than 80 characters.
         </p>
 
-        <div className="flex flex-row-reverse mt-6">
-          <button className="border px-3 py-1 bg-gray-400 text-white ml-3">Save Changes</button>
-          <button className="border px-3 py-1">Cancel</button>
+        <div className="flex flex-row-reverse mt-12">
+          <button className="border px-3 py-2 bg-gray-300 text-gray ml-3 rounded">
+            Save Changes
+          </button>
+          <button className="border px-3 py-2 rounded" onClick={()=>closeModal()}>Cancel</button>
         </div>
       </div>
-      
     </ModalContainer>
   );
 };

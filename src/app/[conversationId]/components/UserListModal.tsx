@@ -131,7 +131,7 @@ export default function UserListModal({
                           style={{ height: "24rem" }}
                           className="bg-gray-50 p-6 rounded"
                         >
-                          <div className="bg-white border mb-2 px-3 rounded-lg">
+                          <div className="bg-white border mb-2 px-5 py-4 rounded-lg">
                             <div className="flex justify-between ">
                               <p className="font-bold text-sm">Channel name</p>
                               <button
@@ -144,16 +144,14 @@ export default function UserListModal({
                             </div>
                             # budget
                           </div>
-                          <div className="bg-white border">
-                            <div className="border-b mt-2 mb-2 px-5 py-2">
+                          <div className="bg-white border rounded-lg">
+                            <div className="border-b mt-2 mb-2 px-5 py-3">
                               <div className="flex justify-between ">
                                 <p className="font-bold text-sm">Topic</p>
                                 <button
                                   className="text-sm"
                                   style={{ color: "blue" }}
-                                  onClick={() =>
-                                    setShowSubModal("EDIT_TOPIC")
-                                  }
+                                  onClick={() => setShowSubModal("EDIT_TOPIC")}
                                 >
                                   Edit
                                 </button>
@@ -161,7 +159,7 @@ export default function UserListModal({
                               <p className="text-gray-800">Add a topic</p>
                             </div>
 
-                            <div className="mt-2 mb-2 px-3 py-2">
+                            <div className="mt-2 mb-2 px-5 py-3">
                               <div className="flex justify-between ">
                                 <p className="font-bold text-sm">Description</p>
                                 <button
@@ -182,7 +180,7 @@ export default function UserListModal({
                             </div>
 
                             <hr />
-                            <div className="mt-2 px-3 py-2">
+                            <div className="mt-2 px-5 py-2">
                               <p className="font-bold text-sm">Created By</p>
                               Inyeneobong Akpabio
                             </div>

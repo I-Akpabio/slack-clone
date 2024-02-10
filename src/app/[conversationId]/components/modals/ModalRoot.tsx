@@ -1,5 +1,6 @@
 import { useState } from "react";
 import RenameChannelModal from "./ReanameChannelModal";
+import EditTopicModal from "./EditTopic";
 
 const ModalRoot = ({
   setShowModal,
@@ -21,6 +22,15 @@ const ModalRoot = ({
         />
       );
       break;
+
+      case "EDIT_TOPIC":
+        Modal = (
+          <EditTopicModal
+            showModal={true}
+            closeModal={() => setShowModal(null)}
+          />
+        );
+        break;
 
     default:
       Modal = null;

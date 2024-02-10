@@ -51,7 +51,7 @@ export default function ModalContainer({
                     >
                       {title}
                     </Dialog.Title>
-                    <button>
+                    <button onClick={() => closeModal()}>
                       <FontAwesomeIcon icon={faClose} />
                     </button>
                   </div>
