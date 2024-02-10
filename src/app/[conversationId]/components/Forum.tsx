@@ -7,9 +7,13 @@ import Avatar from "./Avatar";
 import MessageBox from "./MessageBox";
 import { User } from "@prisma/client";
 
+import ModalRoot from "./modals/ModalRoot";
+
 import { useState, useEffect } from "react";
 import { pusherClient } from "@/app/libs/pusher";
 import { find } from "lodash";
+import axios from "axios";
+import UserListModal from "./UserListModal";
 
 const Forum = ({
   currentUser,
@@ -23,6 +27,21 @@ const Forum = ({
   messages: any;
 }) => {
   const [messageList, setMessageList] = useState(messages);
+  const [showModal, setShowModal] = useState(false);
+  const [subModal, setShowSubModal] = useState(null);
+
+  useEffect(() => {
+    const lastMessage = messageList[messageList.length - 1];
+    if (!lastMessage) return;
+
+    const seen = lastMessage.seenIds.filter((id: any) => id == currentUser.id);
+
+    if (seen.length == 0) {
+      axios
+        .post(`/api/conversations/${conversationId}/seen`, {})
+        .then(() => {});
+    }
+  }, []);
 
   useEffect(() => {
     pusherClient.subscribe(conversationId);
@@ -80,6 +99,15 @@ const Forum = ({
 
   return (
     <>
+      <UserListModal
+        currentUser={currentUser}
+        setShowModal={setShowModal}
+        showModal={true}
+        setShowSubModal={setShowSubModal}
+      />
+
+      <ModalRoot subModal={subModal} setShowModal={setShowSubModal} />
+
       {!conversation?.isGroup ? (
         <div
           className="flex justify-between w-100 pb-4"
@@ -115,15 +143,11 @@ const Forum = ({
             </div>
 
             <div className="flex items-center">
-            <button className="flex items-center">
-
-            <Avatar text={currentUser.name[0]} size="small" />
-                
-              
+              <button className="flex items-center">
+                <Avatar text={currentUser.name[0]} size="small" />
 
                 <span className="mr-3 ml-2">{conversation.users.length}</span>
-            </button>
-               
+              </button>
 
               <NewUser />
             </div>

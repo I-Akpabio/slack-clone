@@ -15,13 +15,11 @@ import { pusherClient } from "@/app/libs/pusher";
 
 export default function Sidebar({
   channels,
-  users,
   conversationId,
   currentUser,
   conversation,
   usersWithConversation,
 }: {
-  users: User[];
   channels: Channel[];
   conversationId: string;
   currentUser?: any;
@@ -42,8 +40,12 @@ export default function Sidebar({
 
     const messageHandler = (message: any) => {
       console.log(message);
-      if (message.isGroup) {
+      if(message.conversationId == conversationId) {
+        axios.post(`/api/conversations/${conversationId}/seen`, {})
+        return
+      }
 
+      if (message.isGroup) {
         setChannelList((current: any) =>
           current.map((channel: any) =>
             message.conversationId == channel.conversationId

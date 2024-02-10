@@ -1,6 +1,4 @@
 import Sidebar from "./components/Sidebar";
-import getUsers from "@/app/actions/getUsers";
-import getChannels from "../actions/getChannels";
 import Nav from "./components/Nav";
 import getConversationById from "../actions/getConversationById";
 import getCurrentUser from "../actions/getCurrentUser";
@@ -17,17 +15,15 @@ export default async function ConversationsLayout({
   children: React.ReactNode;
   params: any;
 }) {
-  const users:any = await getUsers();
-  const channels:any = await getChannelsWithConversation();
+  const channels: any = await getChannelsWithConversation();
   const conversation: Conversation = await getConversationById(
     params.conversationId
   );
 
   const currentUser = await getCurrentUser();
+  const messages: any = await getMessages(params.conversationId);
+  const usersWithConversation = await getUsersWithConversation();
 
-  const messages:any = await getMessages(params.conversationId);
-
-  const usersWithConversation = await getUsersWithConversation()
   return (
     <>
       {" "}
@@ -36,7 +32,6 @@ export default async function ConversationsLayout({
         <div className="grid grid-cols-10">
           <div className="col-span-2 side-menu">
             <Sidebar
-              users={users}
               channels={channels}
               currentUser={currentUser}
               conversationId={params.conversationId}

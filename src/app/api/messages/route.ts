@@ -90,6 +90,7 @@ export async function POST(request: Request) {
       pusherServer.trigger(otherEmail, "conversation:update", {
         isGroup: false,
         sender: currentUser.email,
+        conversationId: conversationId,
       });
     }
 
