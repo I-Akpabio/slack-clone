@@ -7,6 +7,7 @@ import getMessages from "../actions/getMessages";
 import { Conversation, User } from "@prisma/client";
 import Forum from "./components/Forum";
 import getChannelsWithConversation from "../actions/getChannelsWithConversation";
+import ForumContainer from "./components/ForumContainer";
 
 export default async function ConversationsLayout({
   params,
@@ -24,6 +25,8 @@ export default async function ConversationsLayout({
   const messages: any = await getMessages(params.conversationId);
   const usersWithConversation = await getUsersWithConversation();
 
+  console.log(params);
+
   return (
     <>
       {" "}
@@ -40,14 +43,13 @@ export default async function ConversationsLayout({
             />
           </div>
 
-          <div className={`col-span-5 col-span-8 px-5 pt-5 center-container`}>
-            <Forum
-              conversationId={params.conversationId}
-              conversation={conversation}
-              currentUser={currentUser}
-              messages={messages}
-            />
-          </div>
+          <ForumContainer
+            conversationId={params.conversationId}
+            conversation={conversation}
+            currentUser={currentUser}
+            messages={messages}
+            children={children}
+          />
         </div>
       </main>
     </>

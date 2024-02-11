@@ -39,7 +39,7 @@ function MessageBox(props: any) {
     <div className="flex items-end" style={{
       position: 'absolute',
       bottom: '13px',
-      width: '76%'
+      width: props.hasExtra?'47%':'76%'
     }}>
       <input
         onChange={(e) => setMsg(e.target.value)}

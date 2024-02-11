@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ModalContainer from "./ModalContainer";
 import { useState } from "react";
 
-const EditTopicModal = ({
+const EDIT_DESCRIPTION = ({
   showModal,
   closeModal,
 }: {
@@ -15,7 +15,7 @@ const EditTopicModal = ({
     <ModalContainer
       showModal={showModal}
       closeModal={closeModal}
-      title="Edit Topic"
+      title="Edit Description"
     >
       <div className="px-6 pb-6">
         <form action="">
@@ -26,19 +26,18 @@ const EditTopicModal = ({
               value={name}
               rows={4}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Add a Topic"
+              placeholder="Add a Description"
               className="px-4 py-2 w-full focus:outline-none"
             />
           </div>
         </form>
 
         <p className="light-1 mt-1">
-          Let people know what #budget is focused on right now (ex. a project
-          milestone). Topics are always visible in the header.
+          Let people know what this channel is for
         </p>
 
         <div className="flex flex-row-reverse mt-12">
-          <button className="border px-4 py-2 bg-lime-600 text-white ml-3 rounded">
+          <button className="border px-4 py-1 bg-lime-600 text-white ml-3 rounded">
             Save
           </button>
           <button
@@ -53,4 +52,4 @@ const EditTopicModal = ({
   );
 };
 
-export default EditTopicModal;
+export default EDIT_DESCRIPTION;
