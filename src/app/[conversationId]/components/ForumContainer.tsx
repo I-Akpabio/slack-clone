@@ -20,9 +20,6 @@ const ForumContainer = ({
 }: IProps) => {
   const params = useParams();
   const router = useRouter();
-
-  console.log(params);
-
   const hasExtra = Object.keys(params).length > 1;
   return (
     <>

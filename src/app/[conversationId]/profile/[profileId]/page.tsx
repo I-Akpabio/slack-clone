@@ -1,16 +1,25 @@
-"use client"
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import Avatar from "../../components/Avatar";
-import { CiMail, CiPhone,CiClock1  } from "react-icons/ci";
+import { CiMail, CiPhone, CiClock1 } from "react-icons/ci";
 import { IoMdClose } from "react-icons/io";
 
-import { useRouter } from "next/navigation";
-import {format} from 'date-fns'
+import { useParams, useRouter } from "next/navigation";
+import { format } from "date-fns";
+import axios from "axios";
 
-const blue ={ color: "blue" }
+const blue = { color: "blue" };
 
 function Profile() {
-  const router = useRouter()
+  const params = useParams();
+
+  useEffect(() => {
+    axios.get("/api/users/" + params.profileId).then((res) => {
+      console.log(res);
+    });
+  }, []);
+  
+  const router = useRouter();
   return (
     <div>
       <div className="flex justify-between border-b px-3 mb-3">
@@ -29,23 +38,16 @@ function Profile() {
         <button className="text-sm font-semibold" style={{ color: "blue" }}>
           Edit
         </button>
-
-       
       </div>
 
       <div className="px-3 text-gray-700 text-md">
-        
         <p className="my-1">Active</p>
-        
 
         <div className="flex items-center my-3">
-          <CiClock1 size={20}/>
-            <p className="ml-2">{format(new Date(), "hh:mm a")} local time</p>
+          <CiClock1 size={20} />
+          <p className="ml-2">{format(new Date(), "hh:mm a")} local time</p>
         </div>
-        
-        </div>
-
-      
+      </div>
 
       <hr />
 
@@ -60,24 +62,27 @@ function Profile() {
 
         <div className="flex mt-3">
           <div className="bg-gray-100 p-2 mt-2">
-          <CiMail size={20} className="" />
+            <CiMail size={20} className="" />
           </div>
-          
+
           <div className="ml-3">
             <p className="text-sm">Email</p>
-            <p className="" style={blue}>thelordvoldermort97@gmail.com</p>
+            <p className="" style={blue}>
+              thelordvoldermort97@gmail.com
+            </p>
           </div>
         </div>
-    
 
         <div className="flex mt-3">
           <div className="bg-gray-100 p-2 mt-2">
-          <CiPhone size={20} className="" />
+            <CiPhone size={20} className="" />
           </div>
-          
+
           <div className="ml-3">
             <p className="text-sm">Phone Number</p>
-            <p className="" style={blue}>09061931589</p>
+            <p className="" style={blue}>
+              09061931589
+            </p>
           </div>
         </div>
       </div>
