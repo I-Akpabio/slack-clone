@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import Avatar from "../../components/Avatar";
 import { CiMail, CiPhone, CiClock1 } from "react-icons/ci";
 import { IoMdClose } from "react-icons/io";
@@ -12,13 +12,15 @@ const blue = { color: "blue" };
 
 function Profile() {
   const params = useParams();
+  const [user, setUser] = useState<{name: string; email: string}>({name: '', email: ''})
 
   useEffect(() => {
     axios.get("/api/users/" + params.profileId).then((res) => {
       console.log(res);
+      setUser(res.data)
     });
   }, []);
-  
+
   const router = useRouter();
   return (
     <div>
@@ -29,11 +31,12 @@ function Profile() {
         </button>
       </div>
       <div className="flex justify-center">
-        <Avatar text="I" size="xl" />
+        {user.name ? <Avatar text={user.name[0]} size="xl" /> : <div className="w-24 bg-gray-300 h-24"></div>}
+        
       </div>
 
       <div className="flex justify-between px-3">
-        <p className="text-xl font-semibold mt-3">Inyeneobong Akpabio</p>
+        <p className="text-xl font-semibold mt-3">{user?.name}</p>
 
         <button className="text-sm font-semibold" style={{ color: "blue" }}>
           Edit
@@ -68,7 +71,7 @@ function Profile() {
           <div className="ml-3">
             <p className="text-sm">Email</p>
             <p className="" style={blue}>
-              thelordvoldermort97@gmail.com
+              {user?.email}
             </p>
           </div>
         </div>
