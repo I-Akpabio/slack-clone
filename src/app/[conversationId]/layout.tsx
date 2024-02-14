@@ -5,15 +5,15 @@ import getCurrentUser from "../actions/getCurrentUser";
 import getUsersWithConversation from "../actions/getUserWithConversations";
 import getMessages from "../actions/getMessages";
 import { Conversation, User } from "@prisma/client";
-import Forum from "./components/Forum";
 import getChannelsWithConversation from "../actions/getChannelsWithConversation";
 import ForumContainer from "./components/ForumContainer";
+import React from "react";
 
 export default async function ConversationsLayout({
   params,
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactElement;
   params: any;
 }) {
   const channels: any = await getChannelsWithConversation();
@@ -24,8 +24,6 @@ export default async function ConversationsLayout({
   const currentUser = await getCurrentUser();
   const messages: any = await getMessages(params.conversationId);
   const usersWithConversation = await getUsersWithConversation();
-
-  console.log(params);
 
   return (
     <>

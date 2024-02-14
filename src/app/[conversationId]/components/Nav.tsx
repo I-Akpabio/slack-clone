@@ -5,11 +5,12 @@ import Avatar from "./Avatar";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useRef, useState } from "react";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
-function Example() {
-  const router = useRouter();
-  const pathname = usePathname()
+import Link from "next/link";
+
+function Example(props: any) {
+  const pathname = usePathname();
 
   return (
     <div className="w-56 text-right">
@@ -43,8 +44,8 @@ function Example() {
             <div className="px-1 py-1 ">
               <Menu.Item>
                 {({ active }) => (
-                  <button
-                    onClick={() => router.push(pathname+"/profile/fdsfds")}
+                  <Link
+                    href={pathname + "/profile/" + props.currentUser.id}
                     className={`${
                       active ? "bg-violet-500 text-white" : "text-gray-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
@@ -61,7 +62,7 @@ function Example() {
                       />
                     )}
                     Profile
-                  </button>
+                  </Link>
                 )}
               </Menu.Item>
             </div>
@@ -259,31 +260,36 @@ function MoveActiveIcon(props: any) {
   );
 }
 
-const Nav = ({ currentUser }: { currentUser: User }) => (
-  <nav>
-    <div className="grid grid-cols-10 py-2">
-      <div className="col-span-2">
-        <div className="flex justify-end pr-5 pt-2">
-          <TimeIcon />
-        </div>
-      </div>
-      <div className="col-span-8">
-        <div className="flex justify-between pr-4">
-          <div className="search-container">
-            <input
-              type="text"
-              name=""
-              id=""
-              className="p-1"
-              placeholder="Search Company"
-            />
+const Nav = ({ currentUser }: { currentUser: User }) => {
+
+
+
+  return (
+    <nav>
+      <div className="grid grid-cols-10 py-2">
+        <div className="col-span-2">
+          <div className="flex justify-end pr-5 pt-2">
+            <TimeIcon />
           </div>
-          {/* <Avatar text={currentUser.name[0]} size="medium" /> */}
-          <Example />
+        </div>
+        <div className="col-span-8">
+          <div className="flex justify-between pr-4">
+            <div className="search-container">
+              <input
+                type="text"
+                name=""
+                id=""
+                className="p-1"
+                placeholder="Search Company"
+              />
+            </div>
+            {/* <Avatar text={currentUser.name[0]} size="medium" /> */}
+            <Example currentUser={currentUser} />
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
-);
+    </nav>
+  );
+};
 
 export default Nav;

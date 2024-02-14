@@ -180,6 +180,10 @@ nav input {
   border-radius: 10px;
 }
 
+.active-sideitem span{
+  opacity: 0.8;
+}
+
 .conversation-link {
   opacity: 0.7;
 }

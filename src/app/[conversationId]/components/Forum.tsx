@@ -30,7 +30,10 @@ const Forum = ({
 }) => {
   const [messageList, setMessageList] = useState(messages);
   const [showModal, setShowModal] = useState(false);
-  const [subModal, setShowSubModal] = useState(null);
+ 
+  const [viewChannel, setViewChannel] = useState(null);
+
+  console.log(conversation);
 
   useEffect(() => {
     const lastMessage = messageList[messageList.length - 1];
@@ -100,7 +103,7 @@ const Forum = ({
   const other = otherUser();
 
   const _setShowModal = (item: any) => {
-    if (subModal && !item) return;
+    // if (subModal && !item) return;
     setShowModal(item);
   };
 
@@ -110,10 +113,9 @@ const Forum = ({
         currentUser={currentUser}
         setShowModal={_setShowModal}
         showModal={showModal}
-        setShowSubModal={setShowSubModal}
+        // setShowSubModal={setShowSubModal}
+        conversation={conversation}
       />
-
-      <ModalRoot subModal={subModal} setShowModal={setShowSubModal} />
 
       {!conversation?.isGroup ? (
         <div

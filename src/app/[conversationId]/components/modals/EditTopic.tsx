@@ -17,12 +17,13 @@ const EditTopicModal = ({
       closeModal={closeModal}
       title="Edit Topic"
     >
-      <div className="px-6 pb-6">
+      <div className="px-6 pb-6" autoFocus>
         <form action="">
           <br />
           <div className="border-grey-200 " style={{ borderWidth: "1px" }}>
             <textarea
               style={{ borderWidth: 0 }}
+              autoFocus={true}
               value={name}
               rows={4}
               onChange={(e) => setName(e.target.value)}

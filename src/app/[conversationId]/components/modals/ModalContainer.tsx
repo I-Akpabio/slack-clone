@@ -18,8 +18,8 @@ export default function ModalContainer({
 }: ModalProps) {
   return (
     <>
-      <Transition appear show={showModal} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+      <Transition appear show={showModal} as={Fragment} > 
+        <Dialog as="div" className="relative z-10" onClose={closeModal} role="dialog">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"

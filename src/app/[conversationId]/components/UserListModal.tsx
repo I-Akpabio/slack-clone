@@ -8,26 +8,30 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { LockIcon, StarIcon } from "@/app/components/Icon";
 import Avatar from "./Avatar";
+import ModalRoot from "./modals/ModalRoot";
 
 interface ModalProps {
   showModal: boolean;
   setShowModal: Function;
   currentUser: any;
-  setShowSubModal: Function;
+  setShowSubModal?: Function;
+  conversation: any;
 }
 
 export default function UserListModal({
   setShowModal,
   showModal,
   currentUser,
-  setShowSubModal,
+  conversation
 }: ModalProps) {
   const [name, setName] = useState("");
   const [users, setUsers] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const[ subModal, setShowSubModal] =useState('')
   const route = useRouter();
 
   const closeModal = () => {
+    if(subModal) return;
     setShowModal(false);
   };
 
@@ -51,6 +55,7 @@ export default function UserListModal({
 
   return (
     <>
+     
       <Transition appear show={showModal} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child
@@ -81,7 +86,7 @@ export default function UserListModal({
                     as="h1"
                     className="text-xl font-bold leading-6 text-gray-900 pl-6 mb-5"
                   >
-                    # budget
+                    # {conversation?.name}
                   </Dialog.Title>
                   <div className="mt-2 flex mb-4 px-6 mb-2">
                     <button className="border px-2 py-1 mr-2">
@@ -142,7 +147,7 @@ export default function UserListModal({
                                 Edit
                               </button>
                             </div>
-                            # budget
+                            # {conversation?.name}
                           </div>
                           <div className="bg-white border rounded-lg">
                             <div className="border-b mt-2 mb-2 px-5 py-3">
@@ -247,7 +252,7 @@ export default function UserListModal({
                                 Edit
                               </button>
                             </div>
-                            # budget
+                            # {conversation?.name}
                           </div>
 
                           <div className="bg-white border">
@@ -268,11 +273,18 @@ export default function UserListModal({
                     </Tab.Panels>
                   </Tab.Group>
                 </Dialog.Panel>
+       
               </Transition.Child>
+              <ModalRoot
+        subModal={subModal}
+        conversation={conversation}
+        setShowModal={setShowSubModal}
+      />
             </div>
           </div>
         </Dialog>
       </Transition>
+     
     </>
   );
 }

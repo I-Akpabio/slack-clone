@@ -1,5 +1,7 @@
+import Link from "next/link";
 import Avatar from "../[conversationId]/components/Avatar";
 import { format } from "date-fns";
+import useUrl from "../hooks/useUrl";
 
 const fS = {fontSize: '11px'}
 
@@ -11,8 +13,9 @@ const ChatMessage = ({
   name?: any;
   message?: any;
   image?: any;
-}) => (
-  !message ? null :
+}) => {
+  const {PROFILE, getUrl} = useUrl();
+  return (!message ? null :
   <div className="flex mt-3 mb-4">
     {message.sender.image ? (
       <img
@@ -28,13 +31,14 @@ const ChatMessage = ({
 
     <div className="grow">
       <div className="flex items-center">
-        <h5 className="font-bold text-sm">{message.sender.name}</h5>
+        <Link className="font-bold text-black text-sm" href={getUrl(PROFILE, message.sender.id)}>{message.sender.name}</Link>
         <p style={fS} className="ml-3 light-2">{format(message.createdAt, "hh: mm aaa")}</p>
       </div>
 
       <p style={{ fontSize: "15px" }}>{message.body}</p>
     </div>
   </div>
-);
+
+)};
 
 export default ChatMessage;

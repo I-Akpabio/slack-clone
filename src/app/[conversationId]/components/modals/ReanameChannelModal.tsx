@@ -6,11 +6,16 @@ import { useState } from "react";
 const RenameChannelModal = ({
   showModal,
   closeModal,
+  channelName
 }: {
   showModal: boolean;
   closeModal: Function;
+  channelName: string
 }) => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState(channelName);
+  const submit = () => {
+    alert("submitting " + name)
+  }
   return (
     <ModalContainer
       showModal={showModal}
@@ -35,6 +40,7 @@ const RenameChannelModal = ({
             <input
               style={{ borderWidth: 0 }}
               value={name}
+              role="textbox"
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g testing-channel"
               className="px-4 py-2 w-full focus:outline-none"
@@ -48,7 +54,7 @@ const RenameChannelModal = ({
         </p>
 
         <div className="flex flex-row-reverse mt-12">
-          <button className="border px-3 py-2 bg-gray-300 text-gray ml-3 rounded">
+          <button onClick={submit} className="border px-3 py-2 bg-gray-300 text-gray ml-3 rounded">
             Save Changes
           </button>
           <button className="border px-3 py-2 rounded" onClick={()=>closeModal()}>Cancel</button>

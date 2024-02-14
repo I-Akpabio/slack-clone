@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Forum from "./Forum";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 
 interface IProps {
   children: any;
@@ -19,11 +19,8 @@ const ForumContainer = ({
   messages,
 }: IProps) => {
   const params = useParams();
-  const router = useRouter();
-
-  console.log(params);
-
   const hasExtra = Object.keys(params).length > 1;
+
   return (
     <>
       <div

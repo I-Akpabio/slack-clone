@@ -22,6 +22,7 @@ const EDIT_DESCRIPTION = ({
           <br />
           <div className="border-grey-200 " style={{ borderWidth: "1px" }}>
             <textarea
+            role="textbox"
               style={{ borderWidth: 0 }}
               value={name}
               rows={4}

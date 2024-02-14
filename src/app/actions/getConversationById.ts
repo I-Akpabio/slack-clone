@@ -17,6 +17,7 @@ const getConversationById = async (conversationId: string) => {
       },
       include: {
         users: true,
+        channel: true
       },
     });
 

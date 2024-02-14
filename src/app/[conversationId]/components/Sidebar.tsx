@@ -238,7 +238,7 @@ export default function Sidebar({
               <Link
                 className={`flex items-center ${
                   conversationId == channel.conversationId
-                    ? " active-sideitem"
+                    ? "active-sideitem"
                     : ""
                 }`}
                 href={"/" + channel.conversationId}
@@ -321,7 +321,7 @@ export default function Sidebar({
                 </button>
               )
             )}
-            <button className=" mt-2" onClick={() => console.log(channelList)}>
+            {/* <button className=" mt-2" onClick={() => console.log(channelList)}>
               <div className="flex items-center">
                 <span className="opacity-70">
                   <FontAwesomeIcon icon={faPlus} />
@@ -329,7 +329,7 @@ export default function Sidebar({
 
                 <span className="ml-3 opacity-70">Add Co-workers</span>
               </div>
-            </button>
+            </button> */}
           </Collapse>
         </div>
       </div>
