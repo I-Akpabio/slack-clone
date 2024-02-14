@@ -22,16 +22,16 @@ export default function UserListModal({
   setShowModal,
   showModal,
   currentUser,
-  conversation
+  conversation,
 }: ModalProps) {
   const [name, setName] = useState("");
   const [users, setUsers] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const[ subModal, setShowSubModal] =useState('')
+  const [subModal, setShowSubModal] = useState("");
   const route = useRouter();
 
   const closeModal = () => {
-    if(subModal) return;
+    if (subModal) return;
     setShowModal(false);
   };
 
@@ -55,7 +55,6 @@ export default function UserListModal({
 
   return (
     <>
-     
       <Transition appear show={showModal} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child
@@ -273,18 +272,16 @@ export default function UserListModal({
                     </Tab.Panels>
                   </Tab.Group>
                 </Dialog.Panel>
-       
               </Transition.Child>
               <ModalRoot
-        subModal={subModal}
-        conversation={conversation}
-        setShowModal={setShowSubModal}
-      />
+                subModal={subModal}
+                conversation={conversation}
+                setShowModal={setShowSubModal}
+              />
             </div>
           </div>
         </Dialog>
       </Transition>
-     
     </>
   );
 }

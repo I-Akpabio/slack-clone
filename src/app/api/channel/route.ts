@@ -40,3 +40,7 @@ export async function POST(request: Request) {
     return new NextResponse("Some error Occured");
   }
 }
+
+export async function PUT(request: Request){
+  
+}
